@@ -20,7 +20,7 @@ class Box extends React.Component {
 
 class Grid extends React.Component {
   render() {
-    const width = (this.props.cols * 16) +1;
+    const width = (this.props.cols * 16) + 1;
     var rowsArr = []
 
     var boxClass = "";
@@ -65,6 +65,41 @@ class Main extends React.Component {
     }
   }
 
+  selecetBox = (row, col) => {
+    let gridCopy = arrayClone(this.state.gridFull);
+    gridCopy[row][col] = !gridCopy[row][col];
+    this.setState({
+      gridFull: gridCopy
+    })
+
+  }
+
+  seed = () => {
+    let gridCopy = arrayClone(this.state.gridFull);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        if (Math.floor(Math.random() * 4) === 1) {
+          gridCopy[i][j] = true;
+        }
+
+      }
+
+    }
+    this.setState({
+      gridFull: gridCopy
+    })
+  }
+
+playButton = () => {
+  clearInterval(this.intervalId)
+  this.intervalId = setInterval(this.play, this.speed);
+}
+
+
+componentDidMount(){
+  this.seed();
+}
+
   render() {
     return (
       <div>
@@ -81,6 +116,10 @@ class Main extends React.Component {
   }
 }
 
+
+function arrayClone(arr) {
+  return JSON.parse(JSON.stringify(arr));
+}
 ReactDOM.render(<Main />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
