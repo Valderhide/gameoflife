@@ -3,31 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Main extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      generation: 0;
+      generation: 0,
     }
   }
-  render(){
-    return(
+  
+  render() {
+    return (
       <div>
-      <h1> The Game of LIfe</h1>
-      <Grid
-      />
-      <h2> Generation: {this.state.generation}</h2>
+        <h1> The Game of LIfe</h1>
+        <Grid
+        />
+        <h2> Generation: {this.state.generation}</h2>
       </div>
     );
   }
 }
 
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Main/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ReactDOM.render(<Main />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
